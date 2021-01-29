@@ -1,3 +1,5 @@
+import setup from '../../utils/setup'
+
 async function channelApi(request, response) {
   const apiSecret = process.env.TWITCH_API_SECRET
   const idChannel = process.env.TWITCH_ID_CHANNEL
@@ -41,8 +43,8 @@ async function channelApi(request, response) {
       views: views,
       url: url
     },
-    videos: 'https://twitch-channel-page.vercel.app/api/videos',
-    clips: 'https://twitch-channel-page.vercel.app/api/clips'
+    videos: `${setup.project_url}/api/videos`,
+    clips: `${setup.project_url}/api/clips`
   })
 }
 

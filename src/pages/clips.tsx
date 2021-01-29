@@ -1,17 +1,20 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import setup from '../utils/setup'
 
 import Title from '../components/Title'
 import VideoItem from '../components/VideoItem'
 
 import { convertDate } from '../utils/date'
 
-export default function Clips({ api }) {
+export default function Clips({ api, channel }) {
   return (
     <>
       <Head>
-        <title>Clips {api.channel.display_name} | Twitch channel page</title>
-        <meta name="description" content={api.channel.description} />
+        <title>
+          Clips {channel.channel.display_name} | {setup.title}
+        </title>
+        <meta name="description" content={channel.channel.description} />
       </Head>
 
       <main className="container">
@@ -43,14 +46,16 @@ export default function Clips({ api }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(
-    'https://twitch-channel-page.vercel.app/api/channel'
-  )
+  const response = await fetch(`${setup.project_url}/api/clips`)
   const data = await response.json()
+
+  const responseChannel = await fetch(`${setup.project_url}/api/channel`)
+  const dataChannel = await responseChannel.json()
 
   return {
     props: {
-      api: data
+      api: data,
+      channel: dataChannel
     },
     revalidate: 28800
   }

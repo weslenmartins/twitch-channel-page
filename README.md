@@ -27,6 +27,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Social networks
 
-Edite o arquivo `src\utils\social-network.js` para definir o menu de redes sociais do canal, o sistema irá preencher automaticamente os menus internos
+### Project setup
+
+Access the file `src\utils\setup.js` to define important information for the automatic filling of information and internal API

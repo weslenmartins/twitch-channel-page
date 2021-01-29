@@ -1,11 +1,11 @@
-import links from '../../utils/social-network'
+import setup from '../../utils/setup'
 
 import * as S from './styled'
 
 const Social = () => {
   return (
     <S.Social>
-      {links.map((link, i) => {
+      {setup.social_network.map((link, i) => {
         return (
           <S.SocialItem key={i}>
             <a

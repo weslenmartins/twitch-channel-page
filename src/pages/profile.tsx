@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import setup from '../utils/setup'
 
 import Title from '../components/Title'
 import Profile from '../components/Profile'
@@ -8,7 +9,9 @@ export default function ProfilePage({ api }) {
   return (
     <>
       <Head>
-        <title>Profile {api.channel.display_name} | Twitch channel page</title>
+        <title>
+          Profile {api.channel.display_name} | {setup.title}
+        </title>
         <meta name="description" content={api.channel.description} />
       </Head>
 
@@ -28,9 +31,7 @@ export default function ProfilePage({ api }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(
-    'https://twitch-channel-page.vercel.app/api/channel'
-  )
+  const response = await fetch(`${setup.project_url}/api/channel`)
   const data = await response.json()
 
   return {

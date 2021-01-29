@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import setup from '../utils/setup'
 
 import Title from '../components/Title'
 import Profile from '../components/Profile'
@@ -7,28 +8,30 @@ import VideoItem from '../components/VideoItem'
 
 import { convertDate } from '../utils/date'
 
-export default function Home({ api }) {
-  const videoList = api.video_list
+export default function Home({ channel, videos, clips }) {
+  const videoList = videos.video_list
   const videoListHiglights = videoList.slice(0, 10)
 
-  const clipList = api.clips_list
+  const clipList = clips.clips_list
   const clipListHiglights = clipList.slice(0, 10)
 
   return (
     <>
       <Head>
-        <title>{api.channel.display_name} | Twitch channel page</title>
-        <meta name="description" content={api.channel.description} />
+        <title>
+          {channel.channel.display_name} | {setup.title}
+        </title>
+        <meta name="description" content={channel.channel.description} />
       </Head>
 
       <main className="container">
         <Profile
-          displayName={api.channel.display_name}
-          logo={api.channel.logo}
-          description={api.channel.description}
-          followers={api.channel.followers}
-          views={api.channel.views}
-          url={api.channel.url}
+          displayName={channel.channel.display_name}
+          logo={channel.channel.logo}
+          description={channel.channel.description}
+          followers={channel.channel.followers}
+          views={channel.channel.views}
+          url={channel.channel.url}
         />
 
         <section>
@@ -82,14 +85,20 @@ export default function Home({ api }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch(
-    'https://twitch-channel-page.vercel.app/api/channel'
-  )
+  const response = await fetch(`${setup.project_url}/api/channel`)
   const data = await response.json()
+
+  const responseClips = await fetch(`${setup.project_url}/api/clips`)
+  const dataClips = await responseClips.json()
+
+  const responseVideos = await fetch(`${setup.project_url}/api/videos`)
+  const dataVideos = await responseVideos.json()
 
   return {
     props: {
-      api: data
+      channel: data,
+      videos: dataVideos,
+      clips: dataClips
     },
     revalidate: 28800
   }
