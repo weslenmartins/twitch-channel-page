@@ -2,6 +2,7 @@ const setup = {
   title: 'Twitch channel page',
   description: '',
   project_url: 'https://twitch-channel-page.vercel.app',
+  github_url: 'https://github.com/weslenmartins',
   social_network: [
     {
       label: 'Facebook',

@@ -36,7 +36,8 @@ export const VideoItemImage = styled.div`
 
   > img {
     position: absolute;
-    top: -100%;
+    top: 0;
+    /* top: -100%; */
     left: 0;
     width: 100%;
     max-width: 100%;

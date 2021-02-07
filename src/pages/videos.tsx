@@ -34,7 +34,7 @@ export default function Videos({ api, channel }) {
                   length={new Date(video.length * 1000)
                     .toISOString()
                     .substr(11, 8)}
-                  animatedPreviewUrl={video.animated_preview_url}
+                  animatedPreviewUrl={video.thumbnails.large[0].url}
                   clip={false}
                 />
               )
