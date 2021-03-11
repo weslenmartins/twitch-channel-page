@@ -3,7 +3,23 @@ import Social from '../Social'
 
 import * as S from './styled'
 
-const Profile = ({ displayName, logo, description, followers, views, url }) => {
+type ProfileProps = {
+  displayName: string
+  logo: string
+  description: string
+  followers: number
+  views: number
+  url: string
+}
+
+const Profile = ({
+  displayName,
+  logo,
+  description,
+  followers,
+  views,
+  url
+}: ProfileProps) => {
   return (
     <S.ProfileWrapper>
       <S.ProfileAvatar>

@@ -6,8 +6,6 @@ import Title from '../components/Title'
 import Profile from '../components/Profile'
 import VideoItem from '../components/VideoItem'
 
-import { convertDate } from '../utils/date'
-
 export default function Home({ channel, videos, clips }) {
   const videoList = videos.video_list
   const videoListHiglights = videoList.slice(0, 10)
@@ -44,13 +42,10 @@ export default function Home({ channel, videos, clips }) {
                   title={video.title}
                   views={video.views}
                   url={video.url}
-                  createdAt={convertDate(video.created_at)}
+                  createdAt={video.created_at}
                   game={video.game}
-                  length={new Date(video.length * 1000)
-                    .toISOString()
-                    .substr(11, 8)}
-                  animatedPreviewUrl={video.thumbnails.large[0].url}
-                  clip={false}
+                  length={video.length}
+                  animatedPreviewUrl={video.thumbnails?.large[0]?.url}
                 />
               )
             })}
@@ -67,11 +62,9 @@ export default function Home({ channel, videos, clips }) {
                   title={video.title}
                   views={video.views}
                   url={video.url}
-                  createdAt={convertDate(video.created_at)}
+                  createdAt={video.created_at}
                   game={video.game}
-                  length={new Date(video.duration * 1000)
-                    .toISOString()
-                    .substr(11, 8)}
+                  length={video.duration}
                   animatedPreviewUrl={video.vod.preview_image_url}
                   clip={true}
                 />

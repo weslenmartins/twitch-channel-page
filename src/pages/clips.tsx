@@ -5,8 +5,6 @@ import setup from '../utils/setup'
 import Title from '../components/Title'
 import VideoItem from '../components/VideoItem'
 
-import { convertDate } from '../utils/date'
-
 export default function Clips({ api, channel }) {
   return (
     <>
@@ -28,11 +26,9 @@ export default function Clips({ api, channel }) {
                   title={video.title}
                   views={video.views}
                   url={video.url}
-                  createdAt={convertDate(video.created_at)}
+                  createdAt={video.created_at}
                   game={video.game}
-                  length={new Date(video.duration * 1000)
-                    .toISOString()
-                    .substr(11, 8)}
+                  length={video.duration}
                   animatedPreviewUrl={video.vod.preview_image_url}
                   clip={true}
                 />
