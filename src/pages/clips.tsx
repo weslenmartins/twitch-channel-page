@@ -29,7 +29,7 @@ export default function Clips({ api, channel }) {
                   createdAt={video.created_at}
                   game={video.game}
                   length={video.duration}
-                  animatedPreviewUrl={video.vod.preview_image_url}
+                  animatedPreviewUrl={video.vod?.preview_image_url}
                   clip={true}
                 />
               )
